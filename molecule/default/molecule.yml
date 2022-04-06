@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: centos
+    image: docker.io/pycontribs/centos:7
+    pre_build_image: false # we don't need ansible installed on the instance
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+  - name: ubuntu
+    image: jrei/systemd-ubuntu
+    pre_build_image: false # we don't need ansible installed on the instance
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true      
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

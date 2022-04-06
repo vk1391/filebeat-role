@@ -1,0 +1,13 @@
+---
+- name: Install filebeat
+  become: true
+  apt:
+    deb: "/tmp/filebeat-{{ elasticsearch_version }}-amd64.deb"
+    state: present
+  notify: restart filebeat
+- name: Start service
+  become: true
+  systemd:
+    name: filebeat
+    state: started    
+  notify: restart filebeat

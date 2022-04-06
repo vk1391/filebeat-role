@@ -1,0 +1,25 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify Ubuntu
+  hosts: ubuntu
+  gather_facts: true
+  tasks:
+    - name: status filebeat 
+      become: true
+      command:
+        cmd: systemctl status filebeat
+      register: fb
+    - name: PRINT RESULT
+      debug: var=fb.stdout_lines      
+- name: Verify centos
+  hosts: centos
+  gather_facts: true
+  tasks:
+    - name: status filebeat 
+      become: true
+      command:
+        cmd: systemctl status filebeat
+      register: fb
+    - name: PRINT RESULT
+      debug: var=fb.stdout_lines       
