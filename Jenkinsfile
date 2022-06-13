@@ -1,17 +1,16 @@
 pipeline {
     agent {
-        label 'linux'
+        label 'docker'
     }
     stages {
         stage('Checkout') {
             steps{
-                git branch: 'main', credentialsId: '7107e6e5-6511-44ab-903a-387cb7a5c266', url: 'git@github.com:netology-code/mnt-homeworks-ansible.git'
+                git branch: 'master', credentialsId: 'd2e52a6d-2c83-46b7-97f3-8f19675bd4d2', url: 'git@github.com:vk1391/filebeat-role.git'
             }
         }
         stage('Install molecule') {
             steps{
                 sh 'pip3 install -r test-requirements.txt'
-                sh "echo =============="
             }
         }
         stage('Run Molecule'){
