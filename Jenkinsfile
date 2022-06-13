@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Install molecule') {
             steps{
-                sh 'pip3 install -r test-requirements.txt'
+                sh 'pip install -r test-requirements.txt'
             }
         }
         stage('Run Molecule'){
